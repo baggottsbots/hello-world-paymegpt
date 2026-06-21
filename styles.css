@@ -10,7 +10,6 @@
       overflow: hidden;
     }
 
-    /* Ambient glow rings */
     .glow-ring {
       position: fixed;
       top: 50%; left: 50%;
@@ -30,7 +29,6 @@
       100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
     }
 
-    /* Particles */
     .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .particle {
       position: absolute;
@@ -45,7 +43,6 @@
       100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
     }
 
-    /* Main content */
     .container {
       position: relative;
       z-index: 1;
@@ -63,10 +60,7 @@
       filter: drop-shadow(0 0 30px rgba(54, 214, 181, 0.4));
       cursor: pointer;
       user-select: none;
-      transition: transform 0.1s ease;
     }
-    .emoji-wrap:active { transform: scale(0.9) rotate(10deg); }
-
     @keyframes wave {
       0%   { transform: rotate(0deg); }
       15%  { transform: rotate(20deg); }
@@ -77,7 +71,6 @@
       100% { transform: rotate(0deg); }
     }
 
-    /* Click counter hint */
     .click-hint {
       font-size: 0.7rem;
       color: rgba(255,255,255,0.15);
@@ -88,7 +81,6 @@
     }
     .click-hint.visible { color: rgba(54, 214, 181, 0.5); }
 
-    /* Pip indicators */
     .pips {
       display: flex;
       justify-content: center;
@@ -131,8 +123,6 @@
       color: rgba(255,255,255,0.5);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      animation: fadeUp 1s ease both;
-      animation-delay: 0.4s;
     }
     .badge {
       display: inline-flex;
@@ -147,8 +137,6 @@
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.05em;
-      animation: fadeUp 1s ease both;
-      animation-delay: 0.7s;
     }
     .badge::before {
       content: '';
@@ -161,33 +149,21 @@
       0%, 100% { transform: scale(1); opacity: 1; }
       50%       { transform: scale(1.4); opacity: 0.5; }
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
 
-    /* ===== EXPLOSION LAYER ===== */
+    /* EXPLOSION */
     #explosion-layer {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       pointer-events: none;
-      z-index: 999;
-      overflow: hidden;
+      z-index: 999; overflow: hidden;
     }
-
-    /* Screen flash */
     #flash {
-      position: fixed;
-      inset: 0;
-      background: white;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1000;
+      position: fixed; inset: 0;
+      background: white; opacity: 0;
+      pointer-events: none; z-index: 1000;
       transition: opacity 0.05s;
     }
     #flash.bang { opacity: 1; }
 
-    /* Shockwave ring */
     .shockwave {
       position: fixed;
       top: 50%; left: 50%;
@@ -195,7 +171,6 @@
       border-radius: 50%;
       border: 4px solid #36D6B5;
       transform: translate(-50%, -50%) scale(0);
-      opacity: 1;
       pointer-events: none;
       animation: shockwaveExpand 0.8s ease-out forwards;
     }
@@ -205,10 +180,8 @@
       100% { transform: translate(-50%, -50%) scale(60); opacity: 0; }
     }
 
-    /* Debris pieces */
     .debris {
       position: fixed;
-      font-size: var(--size);
       pointer-events: none;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -216,11 +189,8 @@
       z-index: 999;
     }
     @keyframes flyOut {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg) scale(1);
-        opacity: 1;
-      }
-      70% { opacity: 1; }
+      0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 1; }
+      70%  { opacity: 1; }
       100% {
         transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
                    rotate(var(--rot)) scale(var(--sf));
@@ -228,7 +198,6 @@
       }
     }
 
-    /* Big BOOM text */
     #boom-text {
       position: fixed;
       top: 50%; left: 50%;
@@ -239,7 +208,6 @@
       text-shadow: 0 0 40px #36D6B5, 0 0 80px #ff4500, 0 0 120px #ff4500;
       pointer-events: none;
       z-index: 1001;
-      letter-spacing: -0.02em;
       opacity: 0;
     }
     #boom-text.visible {
@@ -253,18 +221,17 @@
       100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
     }
 
-    /* Screen shake */
     @keyframes screenShake {
       0%  { transform: translate(0,0) rotate(0); }
-      10% { transform: translate(-8px, -6px) rotate(-1deg); }
-      20% { transform: translate(10px, 8px) rotate(1.5deg); }
-      30% { transform: translate(-10px, 4px) rotate(-1deg); }
-      40% { transform: translate(8px, -8px) rotate(0.5deg); }
-      50% { transform: translate(-6px, 6px) rotate(-0.5deg); }
-      60% { transform: translate(6px, -4px) rotate(1deg); }
-      70% { transform: translate(-4px, 4px) rotate(-0.5deg); }
-      80% { transform: translate(4px, -2px) rotate(0); }
-      90% { transform: translate(-2px, 2px) rotate(0); }
+      10% { transform: translate(-8px,-6px) rotate(-1deg); }
+      20% { transform: translate(10px,8px) rotate(1.5deg); }
+      30% { transform: translate(-10px,4px) rotate(-1deg); }
+      40% { transform: translate(8px,-8px) rotate(0.5deg); }
+      50% { transform: translate(-6px,6px) rotate(-0.5deg); }
+      60% { transform: translate(6px,-4px) rotate(1deg); }
+      70% { transform: translate(-4px,4px) rotate(-0.5deg); }
+      80% { transform: translate(4px,-2px) rotate(0); }
+      90% { transform: translate(-2px,2px) rotate(0); }
       100%{ transform: translate(0,0) rotate(0); }
     }
     body.shaking { animation: screenShake 0.5s ease both; }
