@@ -305,16 +305,14 @@
   <div class="glow-ring"></div>
   <div class="glow-ring"></div>
   <div class="glow-ring"></div>
-
   <div class="particles" id="particles"></div>
-
   <div id="explosion-layer"></div>
   <div id="flash"></div>
   <div id="boom-text">💥 BOOM 💥</div>
 
   <div class="container">
     <div class="emoji-wrap" id="hand" title="Click me...">👋</div>
-    <div class="pips" id="pips">
+    <div class="pips">
       <div class="pip" id="pip1"></div>
       <div class="pip" id="pip2"></div>
       <div class="pip" id="pip3"></div>
@@ -324,6 +322,9 @@
     <p class="tagline">Built with PayMeGPT &nbsp;·&nbsp; Every way to get paid with AI</p>
     <div class="badge">Live on GitHub Pages</div>
   </div>
+
+  <!-- Preload the explosion sound -->
+  <audio id="boom-sfx" src="https://paymegpt.com/objects/generated-audio/1782020558342-d0af03274fbdf696.mp3" preload="auto"></audio>
 
   
   <script src="script.js"></script>
