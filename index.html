@@ -5,10 +5,12 @@
 <base href="/hello-world-paymegpt/">
 <!-- BASE:END -->
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Tailwind CSS for sleek peripheral UI controls -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
 
 <!-- SEO Meta Tags -->
 <title>Hello World 👋</title>
@@ -133,7 +135,7 @@
   function run(){
     if(contactId){
       var xhr=new XMLHttpRequest();
-      xhr.open('GET','https://my.chatbees.io/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=5094');
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=5094');
       xhr.onload=function(){
         if(xhr.status===200){
           try{
@@ -161,7 +163,7 @@
 <script data-payment>
 (function(){
   var slug='BDX72FbEz';
-  var apiBase='https://my.chatbees.io';
+  var apiBase='https://paymegpt.com';
   var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
   function findEmail(){
     var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
@@ -225,7 +227,7 @@
 <script data-cart>
 (function(){
   var slug='BDX72FbEz';
-  var apiBase='https://my.chatbees.io';
+  var apiBase='https://paymegpt.com';
   var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
   function findCartEmail(){
     var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
@@ -300,33 +302,69 @@
 })();
 </script>  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="w-full h-screen flex flex-col justify-between items-center text-white relative">
 
-  <div class="glow-ring"></div>
-  <div class="glow-ring"></div>
-  <div class="glow-ring"></div>
-  <div class="particles" id="particles"></div>
-  <div id="explosion-layer"></div>
-  <div id="flash"></div>
-  <div id="boom-text">💥 BOOM 💥</div>
+    <!-- Ambient background light bleed effects -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(29,78,216,0.15),transparent_70%)] pointer-events-none"></div>
 
-  <div class="container">
-    <div class="emoji-wrap" id="hand" title="Click me...">👋</div>
-    <div class="pips">
-      <div class="pip" id="pip1"></div>
-      <div class="pip" id="pip2"></div>
-      <div class="pip" id="pip3"></div>
+    <!-- Header UI -->
+    <header class="w-full px-6 pt-8 z-10 flex flex-col items-center pointer-events-none">
+        <h1 class="text-xs uppercase tracking-[0.25em] text-blue-400 font-semibold opacity-80 mb-1">Mystic Oracle</h1>
+        <div id="status-text" class="text-sm font-light text-slate-300 opacity-90 pulse-text">Tap ball or shake phone to consult</div>
+    </header>
+
+    <!-- Main Canvas Container -->
+    <div class="relative flex-grow w-full flex items-center justify-center overflow-hidden">
+        <canvas id="gameCanvas" class="max-w-full max-h-full"></canvas>
     </div>
-    <p class="click-hint" id="hint">psst... click the hand</p>
-    <h1>Hello World</h1>
-    <p class="tagline">Built with PayMeGPT &nbsp;·&nbsp; Every way to get paid with AI</p>
-    <div class="badge">Live on GitHub Pages</div>
-  </div>
 
-  <!-- Preload the explosion sound -->
-  <audio id="boom-sfx" src="https://paymegpt.com/objects/generated-audio/1782020558342-d0af03274fbdf696.mp3" preload="auto"></audio>
+    <!-- Absolute Controls Overlay (Themes, Audio, Haptics) -->
+    <footer class="w-full max-w-md px-6 pb-8 z-10 flex flex-col items-center gap-4">
+        <!-- Sensor Permission Button (Dynamic activation) -->
+        <button id="sensor-btn" class="hidden glass-panel px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider text-blue-300 hover:text-white border border-blue-500/20 active:scale-95 transition duration-300 ease-out">
+            ENABLE ACCELEROMETER MODE
+        </button>
 
-  
+        <!-- Control Bar -->
+        <div class="glass-panel w-full p-2.5 rounded-2xl flex justify-between items-center gap-3">
+            <!-- Fluid Theme Picker -->
+            <div class="flex items-center gap-1.5 pl-2">
+                <span class="text-[10px] text-slate-400 tracking-wider mr-1.5 uppercase font-medium">Fluid:</span>
+                <button onclick="setTheme('indigo')" class="w-6 h-6 rounded-full bg-indigo-600 border-2 border-white/40 ring-offset-2 ring-offset-slate-900 transition active:scale-90" title="Classic Blue"></button>
+                <button onclick="setTheme('emerald')" class="w-6 h-6 rounded-full bg-emerald-600 border-2 border-transparent hover:border-white/20 transition active:scale-90" title="Emerald Green"></button>
+                <button onclick="setTheme('crimson')" class="w-6 h-6 rounded-full bg-red-700 border-2 border-transparent hover:border-white/20 transition active:scale-90" title="Crimson Eclipse"></button>
+                <button onclick="setTheme('void')" class="w-6 h-6 rounded-full bg-purple-800 border-2 border-transparent hover:border-white/20 transition active:scale-90" title="Void Nebula"></button>
+            </div>
+
+            <!-- Utility Toggles -->
+            <div class="flex items-center gap-2 pr-1">
+                <button id="sound-btn" class="p-2 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white transition active:scale-90" title="Toggle Sound">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="audio-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9.5H4.5v5h3.25L12 18.75z"/></svg>
+                </button>
+                <button id="haptic-btn" class="p-2 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white transition active:scale-90" title="Toggle Haptics">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Touch Overlay to ensure instant audio gesture registration -->
+    <div id="launch-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-md flex flex-col items-center justify-center z-50 transition-opacity duration-500">
+        <div class="text-center px-8 max-w-sm">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full border border-blue-500/30 flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent)]">
+                <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            </div>
+            <h2 class="text-xl font-medium tracking-wide mb-2">Initialize Mystic Core</h2>
+            <p class="text-xs text-slate-400 mb-6 leading-relaxed">Prepare yourself to commune with the unknown. Experience procedural fluid physical audio synthesis & interactive tactile feedback.</p>
+            <button id="launch-btn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold tracking-widest py-3.5 px-6 rounded-xl shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+                ENTER THE VOID
+            </button>
+        </div>
+    </div>
+
+    
   <script src="script.js"></script>
 </body>
 </html>
+
+
